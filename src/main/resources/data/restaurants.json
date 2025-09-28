@@ -1,0 +1,210 @@
+[
+  {
+    "id": 1,
+    "name": "The Spice Garden",
+    "cuisine": "Sri Lankan",
+    "city": "Colombo",
+    "address": "123 Galle Road, Colombo 03",
+    "phone": "+94 11 234 5678",
+    "rating": 4.5,
+    "priceRange": "$$",
+    "description": "Authentic Sri Lankan cuisine with a modern twist",
+    "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500",
+    "openingHours": {
+      "monday": "11:00 AM - 10:00 PM",
+      "tuesday": "11:00 AM - 10:00 PM",
+      "wednesday": "11:00 AM - 10:00 PM",
+      "thursday": "11:00 AM - 10:00 PM",
+      "friday": "11:00 AM - 11:00 PM",
+      "saturday": "11:00 AM - 11:00 PM",
+      "sunday": "11:00 AM - 9:00 PM"
+    },
+    "amenities": ["WiFi", "Parking", "Outdoor Seating", "Takeaway"],
+    "coordinates": {
+      "latitude": 6.9271,
+      "longitude": 79.8612
+    }
+  },
+  {
+    "id": 2,
+    "name": "Bamboo Garden",
+    "cuisine": "Chinese",
+    "city": "Kandy",
+    "address": "45 Peradeniya Road, Kandy",
+    "phone": "+94 81 234 5678",
+    "rating": 4.2,
+    "priceRange": "$$$",
+    "description": "Traditional Chinese dishes in a serene garden setting",
+    "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500",
+    "openingHours": {
+      "monday": "12:00 PM - 10:00 PM",
+      "tuesday": "12:00 PM - 10:00 PM",
+      "wednesday": "12:00 PM - 10:00 PM",
+      "thursday": "12:00 PM - 10:00 PM",
+      "friday": "12:00 PM - 11:00 PM",
+      "saturday": "12:00 PM - 11:00 PM",
+      "sunday": "12:00 PM - 9:00 PM"
+    },
+    "amenities": ["WiFi", "Parking", "Garden Seating", "Private Dining"],
+    "coordinates": {
+      "latitude": 7.2906,
+      "longitude": 80.6337
+    }
+  },
+  {
+    "id": 3,
+    "name": "Cafe Mocha",
+    "cuisine": "International",
+    "city": "Colombo",
+    "address": "78 Independence Avenue, Colombo 07",
+    "phone": "+94 11 345 6789",
+    "rating": 4.0,
+    "priceRange": "$$",
+    "description": "Modern cafe with international cuisine and specialty coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=500",
+    "openingHours": {
+      "monday": "7:00 AM - 10:00 PM",
+      "tuesday": "7:00 AM - 10:00 PM",
+      "wednesday": "7:00 AM - 10:00 PM",
+      "thursday": "7:00 AM - 10:00 PM",
+      "friday": "7:00 AM - 11:00 PM",
+      "saturday": "8:00 AM - 11:00 PM",
+      "sunday": "8:00 AM - 9:00 PM"
+    },
+    "amenities": ["WiFi", "Coffee", "Breakfast", "Brunch"],
+    "coordinates": {
+      "latitude": 6.9027,
+      "longitude": 79.8607
+    }
+  },
+  {
+    "id": 4,
+    "name": "Seafood Paradise",
+    "cuisine": "Seafood",
+    "city": "Negombo",
+    "address": "Beach Road, Negombo",
+    "phone": "+94 31 456 7890",
+    "rating": 4.7,
+    "priceRange": "$$$",
+    "description": "Fresh seafood with ocean views",
+    "imageUrl": "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=500",
+    "openingHours": {
+      "monday": "11:00 AM - 10:00 PM",
+      "tuesday": "11:00 AM - 10:00 PM",
+      "wednesday": "11:00 AM - 10:00 PM",
+      "thursday": "11:00 AM - 10:00 PM",
+      "friday": "11:00 AM - 11:00 PM",
+      "saturday": "11:00 AM - 11:00 PM",
+      "sunday": "11:00 AM - 9:00 PM"
+    },
+    "amenities": ["Ocean View", "Parking", "Fresh Seafood", "Beach Access"],
+    "coordinates": {
+      "latitude": 7.2088,
+      "longitude": 79.8358
+    }
+  },
+  {
+    "id": 5,
+    "name": "Spice Route",
+    "cuisine": "Indian",
+    "city": "Colombo",
+    "address": "156 Duplication Road, Colombo 04",
+    "phone": "+94 11 567 8901",
+    "rating": 4.3,
+    "priceRange": "$$",
+    "description": "Authentic Indian cuisine with traditional spices",
+    "imageUrl": "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=500",
+    "openingHours": {
+      "monday": "11:30 AM - 10:30 PM",
+      "tuesday": "11:30 AM - 10:30 PM",
+      "wednesday": "11:30 AM - 10:30 PM",
+      "thursday": "11:30 AM - 10:30 PM",
+      "friday": "11:30 AM - 11:30 PM",
+      "saturday": "11:30 AM - 11:30 PM",
+      "sunday": "11:30 AM - 10:00 PM"
+    },
+    "amenities": ["WiFi", "Parking", "Vegetarian Options", "Spicy Food"],
+    "coordinates": {
+      "latitude": 6.9147,
+      "longitude": 79.8730
+    }
+  },
+  {
+    "id": 6,
+    "name": "The Italian Corner",
+    "cuisine": "Italian",
+    "city": "Kandy",
+    "address": "23 Temple Street, Kandy",
+    "phone": "+94 81 345 6789",
+    "rating": 4.4,
+    "priceRange": "$$$",
+    "description": "Authentic Italian pasta and pizza",
+    "imageUrl": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=500",
+    "openingHours": {
+      "monday": "12:00 PM - 10:00 PM",
+      "tuesday": "12:00 PM - 10:00 PM",
+      "wednesday": "12:00 PM - 10:00 PM",
+      "thursday": "12:00 PM - 10:00 PM",
+      "friday": "12:00 PM - 11:00 PM",
+      "saturday": "12:00 PM - 11:00 PM",
+      "sunday": "12:00 PM - 9:00 PM"
+    },
+    "amenities": ["WiFi", "Parking", "Wine Selection", "Romantic Dining"],
+    "coordinates": {
+      "latitude": 7.2906,
+      "longitude": 80.6337
+    }
+  },
+  {
+    "id": 7,
+    "name": "Street Food Central",
+    "cuisine": "Street Food",
+    "city": "Colombo",
+    "address": "Pettah Market, Colombo 11",
+    "phone": "+94 11 678 9012",
+    "rating": 3.8,
+    "priceRange": "$",
+    "description": "Local street food and quick bites",
+    "imageUrl": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500",
+    "openingHours": {
+      "monday": "6:00 AM - 8:00 PM",
+      "tuesday": "6:00 AM - 8:00 PM",
+      "wednesday": "6:00 AM - 8:00 PM",
+      "thursday": "6:00 AM - 8:00 PM",
+      "friday": "6:00 AM - 8:00 PM",
+      "saturday": "6:00 AM - 8:00 PM",
+      "sunday": "6:00 AM - 6:00 PM"
+    },
+    "amenities": ["Quick Service", "Local Food", "Budget Friendly"],
+    "coordinates": {
+      "latitude": 6.9344,
+      "longitude": 79.8428
+    }
+  },
+  {
+    "id": 8,
+    "name": "The Royal Thai",
+    "cuisine": "Thai",
+    "city": "Colombo",
+    "address": "89 Horton Place, Colombo 07",
+    "phone": "+94 11 789 0123",
+    "rating": 4.6,
+    "priceRange": "$$$",
+    "description": "Authentic Thai cuisine with traditional flavors",
+    "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500",
+    "openingHours": {
+      "monday": "11:00 AM - 10:00 PM",
+      "tuesday": "11:00 AM - 10:00 PM",
+      "wednesday": "11:00 AM - 10:00 PM",
+      "thursday": "11:00 AM - 10:00 PM",
+      "friday": "11:00 AM - 11:00 PM",
+      "saturday": "11:00 AM - 11:00 PM",
+      "sunday": "11:00 AM - 9:00 PM"
+    },
+    "amenities": ["WiFi", "Parking", "Spicy Food", "Traditional Decor"],
+    "coordinates": {
+      "latitude": 6.9027,
+      "longitude": 79.8607
+    }
+  }
+]

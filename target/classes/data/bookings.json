@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "restaurantId": 1,
+    "date": "2024-02-15",
+    "time": "19:00",
+    "partySize": 4,
+    "status": "CONFIRMED",
+    "specialRequests": "Window table preferred"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "restaurantId": 3,
+    "date": "2024-02-20",
+    "time": "12:30",
+    "partySize": 2,
+    "status": "CONFIRMED",
+    "specialRequests": "Vegetarian options needed"
+  },
+  {
+    "id": 3,
+    "userId": 2,
+    "restaurantId": 2,
+    "date": "2024-02-18",
+    "time": "20:00",
+    "partySize": 6,
+    "status": "CONFIRMED",
+    "specialRequests": "Anniversary dinner"
+  },
+  {
+    "id": 4,
+    "userId": 2,
+    "restaurantId": 4,
+    "date": "2024-02-22",
+    "time": "18:30",
+    "partySize": 3,
+    "status": "PENDING",
+    "specialRequests": "Seafood platter for 3"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "restaurantId": 5,
+    "date": "2024-02-25",
+    "time": "19:30",
+    "partySize": 2,
+    "status": "CANCELLED",
+    "specialRequests": "Mild spice level"
+  }
+]

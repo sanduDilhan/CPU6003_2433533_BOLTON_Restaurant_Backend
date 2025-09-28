@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "restaurantId": 1,
+    "rating": 5,
+    "comment": "Excellent food and service! The curry was amazing."
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "restaurantId": 1,
+    "rating": 4,
+    "comment": "Good food but service was a bit slow."
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "restaurantId": 2,
+    "rating": 4,
+    "comment": "Beautiful garden setting and authentic Chinese cuisine."
+  },
+  {
+    "id": 4,
+    "userId": 2,
+    "restaurantId": 3,
+    "rating": 5,
+    "comment": "Best coffee in Colombo! Great atmosphere for work meetings."
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "restaurantId": 4,
+    "rating": 5,
+    "comment": "Fresh seafood with amazing ocean views. Highly recommended!"
+  },
+  {
+    "id": 6,
+    "userId": 2,
+    "restaurantId": 5,
+    "rating": 3,
+    "comment": "Food was okay but too spicy for my taste."
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "restaurantId": 6,
+    "rating": 4,
+    "comment": "Authentic Italian pasta. The atmosphere is romantic."
+  },
+  {
+    "id": 8,
+    "userId": 2,
+    "restaurantId": 8,
+    "rating": 5,
+    "comment": "Amazing Thai food! The pad thai was perfect."
+  }
+]
