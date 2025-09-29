@@ -1,5 +1,7 @@
 package com.tabletop.restaurant.controller;
 
+import com.tabletop.restaurant.dto.LoginRequestDto;
+import com.tabletop.restaurant.dto.LoginResponseDto;
 import com.tabletop.restaurant.dto.RegistrationResponseDto;
 import com.tabletop.restaurant.dto.UserRegistrationDto;
 import com.tabletop.restaurant.entity.User;
@@ -39,6 +41,32 @@ public class UserController {
         Optional<User> user = userService.getUserByUsername(username);
         return user.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto loginRequest) {
+        try {
+            System.out.println("Login request received: " + loginRequest.getUsername());
+            LoginResponseDto response = userService.login(loginRequest);
+            
+            if (response.isSuccess()) {
+                System.out.println("Login successful for: " + loginRequest.getUsername());
+                return ResponseEntity.ok(response);
+            } else {
+                System.out.println("Login failed for: " + loginRequest.getUsername() + ", Error: " + response.getError());
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            System.err.println("Login controller error: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest()
+                .body(LoginResponseDto.error("Login failed", "An error occurred during login: " + e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/test-login")
+    public ResponseEntity<String> testLogin() {
+        return ResponseEntity.ok("Login endpoint is accessible");
     }
     
     @PostMapping("/register")

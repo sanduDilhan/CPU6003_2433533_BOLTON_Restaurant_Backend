@@ -1,8 +1,11 @@
 package com.tabletop.restaurant.service;
 
+import com.tabletop.restaurant.dto.LoginRequestDto;
+import com.tabletop.restaurant.dto.LoginResponseDto;
 import com.tabletop.restaurant.dto.UserRegistrationDto;
 import com.tabletop.restaurant.entity.User;
 import com.tabletop.restaurant.repository.UserRepository;
+import com.tabletop.restaurant.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
+    @Autowired
+    private JwtUtil jwtUtil;
+    
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -34,6 +40,43 @@ public class UserService {
     
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    
+    public LoginResponseDto login(LoginRequestDto loginRequest) {
+        try {
+            System.out.println("Login attempt for username: " + loginRequest.getUsername());
+            
+            // Find user by username
+            Optional<User> userOpt = userRepository.findByUsername(loginRequest.getUsername());
+            
+            if (userOpt.isEmpty()) {
+                System.out.println("User not found: " + loginRequest.getUsername());
+                return LoginResponseDto.error("Login failed", "Invalid username or password");
+            }
+            
+            User user = userOpt.get();
+            System.out.println("User found: " + user.getUsername() + ", Role: " + user.getRole());
+            
+            // Verify password
+            boolean passwordMatch = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
+            System.out.println("Password match: " + passwordMatch);
+            
+            if (!passwordMatch) {
+                return LoginResponseDto.error("Login failed", "Invalid username or password");
+            }
+            
+            // Generate JWT token
+            String token = jwtUtil.generateToken(user.getUsername(), user.getId(), user.getRole().name());
+            System.out.println("Token generated successfully");
+            
+            // Return success response with token and user data
+            return LoginResponseDto.success("Login successful", token, user);
+            
+        } catch (Exception e) {
+            System.err.println("Login error: " + e.getMessage());
+            e.printStackTrace();
+            return LoginResponseDto.error("Login failed", "An error occurred during login: " + e.getMessage());
+        }
     }
     
     public User registerUser(UserRegistrationDto registrationDto) {

@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/restaurants/**").permitAll()
                 .requestMatchers("/api/reviews/**").permitAll()
                 .requestMatchers("/api/users/register").permitAll()
+                .requestMatchers("/api/users/login").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             )
