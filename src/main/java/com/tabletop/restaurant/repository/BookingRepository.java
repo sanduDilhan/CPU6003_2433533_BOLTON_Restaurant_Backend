@@ -24,3 +24,4 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("SELECT COUNT(b) FROM Booking b WHERE b.restaurantId = :restaurantId AND b.status = 'CONFIRMED'")
     Long countConfirmedBookingsByRestaurantId(@Param("restaurantId") Long restaurantId);
 }
+

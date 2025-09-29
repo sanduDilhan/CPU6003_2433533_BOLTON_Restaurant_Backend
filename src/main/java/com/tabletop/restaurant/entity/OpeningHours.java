@@ -36,3 +36,4 @@ public class OpeningHours {
     public String getSunday() { return sunday; }
     public void setSunday(String sunday) { this.sunday = sunday; }
 }
+

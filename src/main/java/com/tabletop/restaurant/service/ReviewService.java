@@ -52,3 +52,4 @@ public class ReviewService {
         return reviewRepository.countReviewsByRestaurantId(restaurantId);
     }
 }
+

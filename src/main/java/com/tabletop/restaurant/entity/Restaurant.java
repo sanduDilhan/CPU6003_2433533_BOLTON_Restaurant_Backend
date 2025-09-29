@@ -98,3 +98,4 @@ public class Restaurant {
     public OpeningHours getOpeningHours() { return openingHours; }
     public void setOpeningHours(OpeningHours openingHours) { this.openingHours = openingHours; }
 }
+

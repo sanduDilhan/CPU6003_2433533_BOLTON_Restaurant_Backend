@@ -21,3 +21,4 @@ public class Coordinates {
     public Double getLongitude() { return longitude; }
     public void setLongitude(Double longitude) { this.longitude = longitude; }
 }
+

@@ -2,6 +2,7 @@ package com.tabletop.restaurant.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tabletop.restaurant.entity.*;
 import com.tabletop.restaurant.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
-// @Component  // Temporarily disabled to avoid startup issues
+@Component
 public class DataInitializer implements CommandLineRunner {
     
     @Autowired
@@ -47,6 +48,7 @@ public class DataInitializer implements CommandLineRunner {
     
     private void initializeData() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         
         // Load restaurants
         try (InputStream inputStream = new ClassPathResource("data/restaurants.json").getInputStream()) {

@@ -90,3 +90,4 @@ public class SimpleDataInitializer implements CommandLineRunner {
         System.out.println("Sample data initialized successfully!");
     }
 }
+
