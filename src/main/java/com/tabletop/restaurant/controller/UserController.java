@@ -1,8 +1,10 @@
 package com.tabletop.restaurant.controller;
 
+import com.tabletop.restaurant.dto.FavoritesResponseDto;
 import com.tabletop.restaurant.dto.LoginRequestDto;
 import com.tabletop.restaurant.dto.LoginResponseDto;
 import com.tabletop.restaurant.dto.RegistrationResponseDto;
+import com.tabletop.restaurant.dto.ToggleFavoriteDto;
 import com.tabletop.restaurant.dto.UserRegistrationDto;
 import com.tabletop.restaurant.entity.User;
 import com.tabletop.restaurant.service.UserService;
@@ -69,6 +71,20 @@ public class UserController {
         return ResponseEntity.ok("Login endpoint is accessible");
     }
     
+    @GetMapping("/test-favorites/{userId}")
+    public ResponseEntity<String> testFavorites(@PathVariable Long userId) {
+        try {
+            Optional<User> user = userService.getUserById(userId);
+            if (user.isPresent()) {
+                return ResponseEntity.ok("User found: " + user.get().getUsername() + ", Favorites: " + user.get().getFavorites());
+            } else {
+                return ResponseEntity.ok("User not found with ID: " + userId);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error: " + e.getMessage());
+        }
+    }
+    
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponseDto> registerUser(@Valid @RequestBody UserRegistrationDto registrationDto) {
         try {
@@ -105,16 +121,98 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
     
+    @GetMapping("/{userId}/favorites")
+    public ResponseEntity<FavoritesResponseDto> getUserFavorites(@PathVariable Long userId) {
+        try {
+            FavoritesResponseDto response = userService.getUserFavorites(userId);
+            if (response.isSuccess()) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                .body(FavoritesResponseDto.error("Failed to get favorites", e.getMessage()));
+        }
+    }
+    
+    @PostMapping("/{userId}/favorites/toggle")
+    public ResponseEntity<FavoritesResponseDto> toggleFavorite(@PathVariable Long userId, @Valid @RequestBody ToggleFavoriteDto toggleDto) {
+        try {
+            FavoritesResponseDto response = userService.toggleFavorite(userId, toggleDto.getRestaurantId());
+            if (response.isSuccess()) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                .body(FavoritesResponseDto.error("Failed to toggle favorite", e.getMessage()));
+        }
+    }
+    
     @PostMapping("/{userId}/favorites/{restaurantId}")
-    public ResponseEntity<Boolean> addToFavorites(@PathVariable Long userId, @PathVariable Long restaurantId) {
-        boolean success = userService.addToFavorites(userId, restaurantId);
-        return ResponseEntity.ok(success);
+    public ResponseEntity<FavoritesResponseDto> addToFavorites(@PathVariable Long userId, @PathVariable Long restaurantId) {
+        try {
+            System.out.println("Add to favorites request - User ID: " + userId + ", Restaurant ID: " + restaurantId);
+            
+            // Check if already favorite
+            Optional<User> userOpt = userService.getUserById(userId);
+            if (userOpt.isEmpty()) {
+                return ResponseEntity.badRequest()
+                    .body(FavoritesResponseDto.error("User not found", "User with ID " + userId + " not found"));
+            }
+            
+            User user = userOpt.get();
+            List<Long> favorites = user.getFavorites();
+            if (favorites != null && favorites.contains(restaurantId)) {
+                return ResponseEntity.badRequest()
+                    .body(FavoritesResponseDto.error("Already favorite", "Restaurant is already in favorites"));
+            }
+            
+            FavoritesResponseDto response = userService.toggleFavorite(userId, restaurantId);
+            if (response.isSuccess()) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            System.err.println("Add to favorites error: " + e.getMessage());
+            return ResponseEntity.badRequest()
+                .body(FavoritesResponseDto.error("Failed to add to favorites", e.getMessage()));
+        }
     }
     
     @DeleteMapping("/{userId}/favorites/{restaurantId}")
-    public ResponseEntity<Boolean> removeFromFavorites(@PathVariable Long userId, @PathVariable Long restaurantId) {
-        boolean success = userService.removeFromFavorites(userId, restaurantId);
-        return ResponseEntity.ok(success);
+    public ResponseEntity<FavoritesResponseDto> removeFromFavorites(@PathVariable Long userId, @PathVariable Long restaurantId) {
+        try {
+            System.out.println("Remove from favorites request - User ID: " + userId + ", Restaurant ID: " + restaurantId);
+            
+            // Check if not favorite
+            Optional<User> userOpt = userService.getUserById(userId);
+            if (userOpt.isEmpty()) {
+                return ResponseEntity.badRequest()
+                    .body(FavoritesResponseDto.error("User not found", "User with ID " + userId + " not found"));
+            }
+            
+            User user = userOpt.get();
+            List<Long> favorites = user.getFavorites();
+            if (favorites == null || !favorites.contains(restaurantId)) {
+                return ResponseEntity.badRequest()
+                    .body(FavoritesResponseDto.error("Not favorite", "Restaurant is not in favorites"));
+            }
+            
+            FavoritesResponseDto response = userService.toggleFavorite(userId, restaurantId);
+            if (response.isSuccess()) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            System.err.println("Remove from favorites error: " + e.getMessage());
+            return ResponseEntity.badRequest()
+                .body(FavoritesResponseDto.error("Failed to remove from favorites", e.getMessage()));
+        }
     }
     
     @DeleteMapping("/{id}")
