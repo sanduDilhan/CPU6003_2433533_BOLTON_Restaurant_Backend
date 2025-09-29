@@ -25,3 +25,4 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Long countConfirmedBookingsByRestaurantId(@Param("restaurantId") Long restaurantId);
 }
 
+

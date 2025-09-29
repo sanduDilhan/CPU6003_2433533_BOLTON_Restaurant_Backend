@@ -22,3 +22,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Long countReviewsByRestaurantId(@Param("restaurantId") Long restaurantId);
 }
 
+

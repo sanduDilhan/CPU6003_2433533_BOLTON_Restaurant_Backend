@@ -32,3 +32,4 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findByCityOrderByRatingDesc(@Param("city") String city);
 }
 
+

@@ -1,5 +1,6 @@
 package com.tabletop.restaurant.service;
 
+import com.tabletop.restaurant.dto.UserRegistrationDto;
 import com.tabletop.restaurant.entity.User;
 import com.tabletop.restaurant.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,31 @@ public class UserService {
     
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    
+    public User registerUser(UserRegistrationDto registrationDto) {
+        // Check if username already exists
+        if (userRepository.existsByUsername(registrationDto.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
+        
+        // Check if email already exists
+        if (userRepository.existsByEmail(registrationDto.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+        
+        // Create new user from registration data
+        User user = new User();
+        user.setUsername(registrationDto.getUsername());
+        user.setEmail(registrationDto.getEmail());
+        user.setFirstName(registrationDto.getFirstName());
+        user.setLastName(registrationDto.getLastName());
+        user.setPhone(registrationDto.getPhone());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        user.setRole(User.Role.USER); // Default role
+        user.setCreatedAt(LocalDateTime.now());
+        
+        return userRepository.save(user);
     }
     
     public User createUser(User user) {
@@ -84,4 +110,5 @@ public class UserService {
         return false;
     }
 }
+
 

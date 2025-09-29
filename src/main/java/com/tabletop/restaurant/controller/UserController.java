@@ -1,8 +1,12 @@
 package com.tabletop.restaurant.controller;
 
+import com.tabletop.restaurant.dto.RegistrationResponseDto;
+import com.tabletop.restaurant.dto.UserRegistrationDto;
 import com.tabletop.restaurant.entity.User;
 import com.tabletop.restaurant.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +39,25 @@ public class UserController {
         Optional<User> user = userService.getUserByUsername(username);
         return user.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+    
+    @PostMapping("/register")
+    public ResponseEntity<RegistrationResponseDto> registerUser(@Valid @RequestBody UserRegistrationDto registrationDto) {
+        try {
+            // Validate password confirmation
+            if (!registrationDto.isPasswordMatch()) {
+                return ResponseEntity.badRequest()
+                    .body(RegistrationResponseDto.error("Registration failed", "Passwords do not match"));
+            }
+            
+            User user = userService.registerUser(registrationDto);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                .body(RegistrationResponseDto.success("User registered successfully", user));
+                
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest()
+                .body(RegistrationResponseDto.error("Registration failed", e.getMessage()));
+        }
     }
     
     @PostMapping
@@ -72,4 +95,5 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 }
+
 
