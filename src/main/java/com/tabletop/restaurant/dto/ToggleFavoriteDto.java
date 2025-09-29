@@ -18,3 +18,4 @@ public class ToggleFavoriteDto {
     public Long getRestaurantId() { return restaurantId; }
     public void setRestaurantId(Long restaurantId) { this.restaurantId = restaurantId; }
 }
+

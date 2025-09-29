@@ -27,3 +27,4 @@ public class TestController {
         return "No 403 error! Endpoint is accessible.";
     }
 }
+

@@ -56,3 +56,4 @@ public class BookingRequestDto {
     public String getSpecialRequests() { return specialRequests; }
     public void setSpecialRequests(String specialRequests) { this.specialRequests = specialRequests; }
 }
+

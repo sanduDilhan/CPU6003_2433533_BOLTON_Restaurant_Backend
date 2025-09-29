@@ -99,6 +99,28 @@ public class BookingController {
         return ResponseEntity.notFound().build();
     }
     
+    @PutMapping("/{id}/cancel/{userId}")
+    public ResponseEntity<BookingResponseDto> cancelBookingWithValidation(@PathVariable Long id, @PathVariable Long userId) {
+        try {
+            System.out.println("Cancel booking request - Booking ID: " + id + ", User ID: " + userId);
+            
+            BookingResponseDto response = bookingService.cancelBookingWithValidation(id, userId);
+            
+            if (response.isSuccess()) {
+                System.out.println("Booking cancelled successfully: " + response.getId());
+                return ResponseEntity.ok(response);
+            } else {
+                System.out.println("Booking cancellation failed: " + response.getError());
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            System.err.println("Cancel booking controller error: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest()
+                .body(BookingResponseDto.error("Cancel booking failed", "An error occurred during cancellation: " + e.getMessage()));
+        }
+    }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         bookingService.deleteBooking(id);

@@ -154,6 +154,60 @@ public class BookingService {
         }
         return null;
     }
+    
+    public BookingResponseDto cancelBookingWithValidation(Long bookingId, Long userId) {
+        try {
+            System.out.println("Cancelling booking: " + bookingId + " for user: " + userId);
+            
+            // Find the booking
+            Optional<Booking> bookingOpt = bookingRepository.findById(bookingId);
+            if (bookingOpt.isEmpty()) {
+                System.out.println("Booking not found: " + bookingId);
+                return BookingResponseDto.error("Booking not found", "Booking with ID " + bookingId + " not found");
+            }
+            
+            Booking booking = bookingOpt.get();
+            
+            // Verify user owns the booking
+            if (!booking.getUserId().equals(userId)) {
+                System.out.println("User " + userId + " does not own booking " + bookingId);
+                return BookingResponseDto.error("Unauthorized", "You can only cancel your own bookings");
+            }
+            
+            // Check if booking is already cancelled
+            if (booking.getStatus() == Booking.BookingStatus.CANCELLED) {
+                System.out.println("Booking " + bookingId + " is already cancelled");
+                return BookingResponseDto.error("Already cancelled", "This booking is already cancelled");
+            }
+            
+            // Check if booking is completed
+            if (booking.getStatus() == Booking.BookingStatus.COMPLETED) {
+                System.out.println("Booking " + bookingId + " is completed and cannot be cancelled");
+                return BookingResponseDto.error("Cannot cancel", "Completed bookings cannot be cancelled");
+            }
+            
+            // Check if booking date is in the past (optional business rule)
+            LocalDate today = LocalDate.now();
+            if (booking.getDate().isBefore(today)) {
+                System.out.println("Booking " + bookingId + " is for a past date");
+                return BookingResponseDto.error("Cannot cancel", "Past bookings cannot be cancelled");
+            }
+            
+            // Cancel the booking
+            booking.setStatus(Booking.BookingStatus.CANCELLED);
+            booking.setUpdatedAt(LocalDateTime.now());
+            
+            Booking savedBooking = bookingRepository.save(booking);
+            System.out.println("Booking cancelled successfully: " + savedBooking.getId());
+            
+            return BookingResponseDto.success(savedBooking, "Booking cancelled successfully");
+            
+        } catch (Exception e) {
+            System.err.println("Error cancelling booking: " + e.getMessage());
+            e.printStackTrace();
+            return BookingResponseDto.error("Failed to cancel booking", "An error occurred: " + e.getMessage());
+        }
+    }
 }
 
 
